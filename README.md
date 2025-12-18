@@ -35,16 +35,27 @@ This project aims to:
 The application follows a fully serverless architecture:
 
 User (Browser)
+
 ↓
+
 Amazon CloudFront (HTTPS)
+
 ↓
+
 Amazon S3 (Static Website)
+
 ↓
+
 Amazon API Gateway (/run)
+
 ↓
+
 AWS Lambda (FinOps Anomaly Logic)
+
 ├── Amazon DynamoDB (Store Results)
+
 ├── Amazon SNS (Send Alerts)
+
 └── Amazon CloudWatch (Logs & Monitoring)
 
 ---
