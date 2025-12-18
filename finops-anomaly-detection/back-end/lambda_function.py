@@ -8,7 +8,7 @@ sns = boto3.client('sns')
 dynamodb = boto3.resource('dynamodb')
 
 TABLE_NAME = 'Finops_Anomalies'
-SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:171675361218:finops-alerts'
+SNS_TOPIC_ARN = 'YOUR_SNS_TOPIC_ARN'
 THRESHOLD_PERCENT = 30
 
 table = dynamodb.Table(TABLE_NAME)
@@ -64,4 +64,5 @@ def lambda_handler(event, context):
             "increase_percent": float(record["increase_percent"]),
             "anomaly_detected": anomaly_detected
         })
+
     }
