@@ -1,0 +1,136 @@
+# 📘 FinOps Anomaly Detection – Project Implementation Guide
+
+This document explains the **step-by-step process** followed to build and deploy the **FinOps Anomaly Detection Serverless Web Application** on AWS.
+
+The goal of this project is to demonstrate how cloud cost anomalies can be detected, stored, and alerted using a fully serverless architecture.
+
+---
+
+## 🔍 Project Summary
+The FinOps Anomaly Detection project is a cloud-based system that allows users to trigger a cost analysis from a web interface. The backend analyzes cost data, detects anomalies based on threshold logic, stores the results, and sends alerts when abnormal spending is detected.
+
+This project follows **FinOps principles** such as cost visibility, monitoring, and proactive alerting.
+
+---
+
+## 🧩 Step-by-Step Implementation
+
+---
+
+## ✅ Step 1: Frontend Development (HTML, CSS, JavaScript)
+- Created a simple web interface with a **Run Cost Analysis** button.
+- Implemented JavaScript `fetch()` to call the backend API.
+- Displayed analysis results dynamically on the webpage.
+
+**Purpose:**  
+To provide a user-friendly interface for triggering cost analysis.
+
+---
+
+## ✅ Step 2: Host Frontend on Amazon S3
+- Created an S3 bucket.
+- Enabled **Static Website Hosting**.
+- Uploaded frontend files (`index.html`, `style.css`, `script.js`).
+
+**Purpose:**  
+To host the frontend without managing any servers.
+
+---
+
+## ✅ Step 3: Enable HTTPS & Mobile Support using CloudFront
+- Created a CloudFront distribution with S3 as the origin.
+- Enabled **Redirect HTTP to HTTPS**.
+- Used the CloudFront URL as the final website link.
+
+**Purpose:**  
+To make the application accessible on all devices (desktop & mobile) securely.
+
+---
+
+## ✅ Step 4: Create Backend Logic using AWS Lambda
+- Implemented a Lambda function (`FinOpsCostAnalyzer`).
+- Added anomaly detection logic using historical and current cost comparison.
+- Converted numeric values to `Decimal` for DynamoDB compatibility.
+
+**Purpose:**  
+To perform serverless cost analysis and anomaly detection.
+
+---
+
+## ✅ Step 5: Create API using Amazon API Gateway
+- Created an HTTP API.
+- Added a `/run` endpoint integrated with the Lambda function.
+- Enabled CORS for frontend communication.
+
+**Purpose:**  
+To expose the Lambda function securely to the frontend.
+
+---
+
+## ✅ Step 6: Store Results in Amazon DynamoDB
+- Created a DynamoDB table (`FinOps_Anomalies`).
+- Stored analysis results such as date, costs, percentage increase, and anomaly status.
+
+**Purpose:**  
+To maintain a history of cost analysis results for auditing and review.
+
+---
+
+## ✅ Step 7: Configure Email Alerts using Amazon SNS
+- Created an SNS topic.
+- Subscribed an email endpoint.
+- Triggered alerts when anomaly threshold was exceeded.
+
+**Purpose:**  
+To notify stakeholders immediately when abnormal spending is detected.
+
+---
+
+## ✅ Step 8: Monitoring with Amazon CloudWatch
+- Used CloudWatch Logs to monitor Lambda executions.
+- Helped debug API and backend issues.
+
+**Purpose:**  
+To ensure observability and operational visibility.
+
+---
+
+## 🧠 Anomaly Detection Logic (Simple Explanation)
+1. Take historical daily costs.
+2. Calculate the average cost.
+3. Compare today’s cost with the average.
+4. If the percentage increase exceeds **30%**, mark it as an anomaly.
+5. Store the result and send an alert if needed.
+
+---
+
+## 🔐 Security & Cost Considerations
+- Fully serverless (no EC2).
+- HTTPS enabled using CloudFront.
+- No AWS WAF to avoid extra costs.
+- IAM roles follow least-privilege access.
+- Designed to run within AWS Free Tier.
+
+---
+
+## 📈 Future Improvements
+- Integrate real AWS billing data using Cost Explorer.
+- Add graphical dashboards (charts).
+- Implement user authentication.
+- Add advanced anomaly detection algorithms.
+
+---
+
+## 🎓 Learning Outcomes
+- Hands-on experience with AWS serverless services.
+- Practical understanding of FinOps concepts.
+- Solved real-world issues like CORS, HTTPS, and DynamoDB data types.
+- Designed and deployed a complete cloud application.
+
+---
+
+## 📌 Note
+This project is implemented for **learning and demonstration purposes**.  
+The architecture is scalable and can be extended for production use.
+
+---
